@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huvudsidan</title>
+    <link href="/views/images/Adventuretajm.jpg" rel="icon">
+    <link rel="stylesheet" href="/css/kanal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="content">
+        
+
+        <% if (playing && playing.playlist && playing.playlist.previoussong && playing.playlist.channel && song && artistNames && topSongs && topSongs.tracks && recommendations && recommendations.tracks) { %>
+            <h2>Kanal: <%= playing.playlist.channel.name %></h2>
+            <h3>Senast spelade låt: <%= playing.playlist.previoussong.title %>, Artist: <%= playing.playlist.previoussong.artist %></h3>
+    
+        <h3>Låten vår sökning hittad på Spotify = <%= song.name %>. Artister: <%= artistNames %></h3>
+        <a href="<%= song.preview_url %>">Play me!</a>
+    
+        <h4>Dina spellistor</h4>
+        <% if (playLists && playLists.length > 0) { %>
+            <p><em>Lägg till nuvarande låt i en spellista!</em></p>
+            <table>
+                <% playLists.forEach(p => { %>
+                    <tr id="playlist">
+                        <% var playListName = p.name; %>
+                        <% var playListID = p.id; %>
+        
+                        <td>Namn: <%= playListName %></td>
+                        <td>
+                            <button class="addSongToPlayListButton" type="button" onclick="addSongToPlayList('<%= playListID %>', '<%= songId %>', '<%= globalId %>')">
+                                +
+                            </button>
+                        </td>
+                    </tr>
+                <% }); %>
+            </table>
+        <% } else { %>
+            <p>Kunde inte ladda spellistorna.</p>
+        <% } %>
+    
+        <h4>Topplåtar för artisten</h4>
+        <table>
+            <% topSongs.tracks.forEach(s => { %>
+                <tr>
+                    <% var songName = s.name; %>
+                    <% var songPreview = s.preview_url; %>
+    
+                    <td>Låt: <%= songName %> </td>
+                    <% if (songPreview !== null) { %>
+                <td><a href="<%= songPreview %>">Preview</a></td>
+            <% } %>
+                </tr>
+            <% }); %>
+        </table>
+    
+        <h4>Rekommenderade låtar som är liknande</h4>
+        <table>
+            <% recommendations.tracks.forEach(r => { %>
+                <tr>
+                    <% var songName = r.name; %>
+                    <% var songPreview = r.preview_url; %>
+                    <% var artistName = r.artists[0].name; %>
+    
+                    <td>Låt: <%= songName %></td>
+                    <td>Artist: <%= artistName %></td>
+                    <% if (songPreview !== null) { %>
+                        <td><a href="<%= songPreview %>">Preview</a></td>
+                    <% } %>
+                </tr>
+            <% }); %>
+        </table>
+        <% } else { %>
+            <h2>Kan inte hämta informationen för denna kanalen</h2>
+            <h2>Gå tillbaka och testa en annan kanal</h2>
+        <% } %>
+        <script>
+            
+            async function addSongToPlayList(playListID, songId, globalId) {
+        const queryParams = new URLSearchParams({
+            uris: `spotify:track:${songId}`,
+        });
+
+        try {
+            const response = await fetch("https://api.spotify.com/v1/playlists/" + playListID + "/tracks?" + queryParams.toString(), {
+                method: "post",
+                headers: {
+                    Authorization: "Bearer " + globalId
+                }
+            });
+
+            if (response.ok) {
+
+                showConfirmationMessage("Låten har lagts till i din valda spellista!");
+            } else {
+
+                showErrorMessage("Ett fel inträffade. Försök igen");
+            }
+        } catch (error) {
+
+            showErrorMessage("Ett fel inträffade. Försök igen");
+        }
+    }
+
+    function showConfirmationMessage(message) {
+
+        alert(message); 
+    }
+
+    function showErrorMessage(message) {
+
+        alert(message); 
+    }
+
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "projektdiggaren",
+  "version": "1.0.0",
+  "description": "Diggaren - MAU",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm install && node main.js"
+  },
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gefors/ProjektDiggaren.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gefors/ProjektDiggaren/issues"
+  },
+  "homepage": "https://github.com/Gefors/ProjektDiggaren#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.0.2",
+    "pug": "^3.0.3"
+  }
+}

@@ -1,0 +1,68 @@
+main{
+    margin: auto
+}
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    background-image: url(/views/images/kanal_image.jpg);
+    background-size: cover;
+}
+
+h4 {
+    font-size: 25px;
+}
+
+#content {
+    margin-left: 4em;
+    margin-top: 3em;
+}
+
+h2 {
+    font-size: 26px;
+}
+
+a {
+    background-color: beige;
+    padding: 5px;
+    margin: 7px;
+    text-decoration: none;
+    color: #000;
+    border-radius: 5px;
+}
+
+a:hover {
+    background-color:coral;
+    cursor: pointer;
+}
+
+tr {
+    height: 20px;
+}
+
+table {
+    height: 150px;
+}
+
+#playlist {
+    font-size: 20px;
+    padding: 5em;
+}
+
+.addSongToPlayListButton {
+    height: 35px;
+    width: 35px;
+    border: none;
+    padding: auto;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.addSongToPlayListButton:hover {
+    background-color:coral;
+    cursor: pointer;
+}
+
+p {
+    font-size: 20px;
+}

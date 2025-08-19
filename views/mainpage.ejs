@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huvudsidan</title>
+    <link href="/views/images/Adventuretajm.jpg" rel="icon">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="content">
+        <h1>Välkommen till diggaren <%= user ? user.display_name : 'Gäst' %>!</h1>
+
+        <h3>Välj en kanal</h3>
+
+        <button type="button" onclick="redirectToChannel('132')">P1</button>
+
+        <button type="button" onclick="redirectToChannel('163')">P2</button>
+
+        <button type="button" onclick="redirectToChannel('164')">P3</button>
+
+        <button type="button" onclick="redirectToChannel('220')">P4</button>
+    </div>
+
+    <script>
+        function redirectToChannel(channelId) {
+            window.location.href = '/kanal/' + channelId;
+        }
+    </script>
+</body>
+</html>
